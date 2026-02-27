@@ -1,0 +1,15 @@
+Test_ID,Test_Name,Exception_Type,PO_Number,Invoice_Number,Risk_Level,Details,Amount_Impact
+TEST_001,Duplicate Invoice,Duplicate Transaction,PO20240033,INV10282,HIGH,Invoice INV10282 appears multiple times,451709.22
+TEST_001,Duplicate Invoice,Duplicate Transaction,PO20240034,INV10282,HIGH,Invoice INV10282 appears multiple times,383952.837
+TEST_001,Duplicate Invoice,Duplicate Transaction,PO20240006,INV59615,HIGH,Invoice INV59615 appears multiple times,366217.23
+TEST_001,Duplicate Invoice,Duplicate Transaction,PO20240007,INV59615,HIGH,Invoice INV59615 appears multiple times,311167.28
+TEST_002,Payment Timing,Payment Before PO,PO20240011,INV14207,HIGH,Payment made 5 days before PO date,422211.7
+TEST_003,Invoice Timing,Invoice Before PO,PO20240016,INV99166,MEDIUM,Invoice dated 3 days before PO,266911.6
+TEST_004,Three-Way Match,Amount Exceeds PO Limit,PO20240021,INV20322,HIGH,"Amount exceeds PO limit by ₹29,867.15 (25.0%)",29867.145000000004
+TEST_004,Three-Way Match,Amount Exceeds PO Limit,PO20240026,INV53309,HIGH,"Amount exceeds PO limit by ₹417,080.77 (1267.0%)",417080.77
+TEST_004,Three-Way Match,Amount Exceeds PO Limit,PO20240027,INV85525,HIGH,"Amount exceeds PO limit by ₹364,007.38 (313.8%)",364007.38
+TEST_004,Three-Way Match,Amount Exceeds PO Limit,PO20240028,INV56438,HIGH,"Amount exceeds PO limit by ₹392,301.45 (382.0%)",392301.45
+TEST_004,Three-Way Match,Amount Exceeds PO Limit,PO20240034,INV10282,HIGH,"Amount exceeds PO limit by ₹239,511.84 (165.8%)",239511.837
+TEST_005,Segregation of Duties,Approver Concentration,Multiple POs by APP001,N/A,MEDIUM,"Approver APP001 approved 3 high-value transactions totaling ₹1,425,000.00",1425000.0
+TEST_005,Segregation of Duties,Approver Concentration,Multiple POs by APP002,N/A,MEDIUM,"Approver APP002 approved 4 high-value transactions totaling ₹1,859,220.26",1859220.26
+TEST_006,Process Timeline,Same-Day Processing,PO20240041,INV47353,MEDIUM,PO and payment occurred on same day - insufficient review time,441027.77

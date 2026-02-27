@@ -1,0 +1,91 @@
+================================================================================
+PURCHASE-TO-PAY INTERNAL CONTROL TESTING SCRIPT
+================================================================================
+
+Total Transactions Loaded: 50
+Date Range: 2024-01-14 to 2024-10-12
+Total Value: ₹13,856,958.69
+
+================================================================================
+
+[TEST 1] DUPLICATE INVOICE DETECTION
+--------------------------------------------------------------------------------
+⚠️  EXCEPTION FOUND: 4 duplicate invoice entries detected
+
+Details:
+ PO_Number Invoice_Number        Vendor_Name     Amount Payment_Date
+PO20240033       INV10282 Infrastructure Ltd 451709.220   2024-06-16
+PO20240034       INV10282 Infrastructure Ltd 383952.837   2024-07-18
+PO20240006       INV59615 Security Solutions 366217.230   2024-06-17
+PO20240007       INV59615 Security Solutions 311167.280   2024-08-10
+
+[TEST 2] PAYMENT TIMING VALIDATION - Payment Before PO
+--------------------------------------------------------------------------------
+⚠️  EXCEPTION FOUND: 1 payment(s) made before PO date
+
+Details:
+ PO_Number    PO_Date Payment_Date   Amount            Vendor_Name
+PO20240011 2024-10-12   2024-10-07 422211.7 Tech Solutions Pvt Ltd
+
+[TEST 3] INVOICE TIMING VALIDATION - Invoice Before PO
+--------------------------------------------------------------------------------
+⚠️  EXCEPTION FOUND: 1 invoice(s) dated before PO date
+
+Details:
+ PO_Number    PO_Date Invoice_Date   Amount        Vendor_Name
+PO20240016 2024-07-14   2024-07-11 266911.6 Security Solutions
+
+[TEST 4] THREE-WAY MATCH - Amount Variance Check
+--------------------------------------------------------------------------------
+⚠️  EXCEPTION FOUND: 5 transaction(s) exceed PO limit (>5% tolerance)
+
+Details:
+ PO_Number     Amount  PO_Amount_Limit  Variance_Percent             Vendor_Name
+PO20240021 149335.725        119468.58         25.000000 Consulting Services Inc
+PO20240026 450000.000         32919.23       1266.982156    Office Supplies Corp
+PO20240027 480000.000        115992.62        313.819431      Infrastructure Ltd
+PO20240028 495000.000        102698.55        381.993173    Office Supplies Corp
+PO20240034 383952.837        144441.00        165.819841      Infrastructure Ltd
+
+[TEST 5] SEGREGATION OF DUTIES - Approver Concentration Analysis
+--------------------------------------------------------------------------------
+⚠️  EXCEPTION FOUND: Approver concentration risk detected
+
+Approvers with 3+ high-value transactions (>₹400,000):
+             Transaction_Count  Total_Amount
+Approver_ID
+APP001                       3    1425000.00
+APP002                       4    1859220.26
+
+[TEST 6] PROCESS TIMELINE - Same-Day PO to Payment
+--------------------------------------------------------------------------------
+⚠️  EXCEPTION FOUND: 1 transaction(s) with same-day PO and payment
+
+Details:
+ PO_Number    PO_Date Payment_Date    Amount             Vendor_Name
+PO20240041 2024-05-15   2024-05-15 441027.77 Consulting Services Inc
+
+[TEST 7] STATISTICAL ANALYSIS - Round Amount Detection
+--------------------------------------------------------------------------------
+✓ PASS: Round amount frequency (2) is within normal range
+
+================================================================================
+AUDIT TESTING SUMMARY
+================================================================================
+
+Exception Summary by Risk Level:
+            Count  Amount_Impact
+Risk_Level
+HIGH           10    3378026.849
+MEDIUM          4    3992159.630
+
+Total Financial Impact of Exceptions: ₹7,370,186.48
+Percentage of Total Transaction Value: 53.19%
+
+✓ Detailed exceptions exported to: P2P_Audit_Exceptions.csv
+
+⚠️  CRITICAL: 10 HIGH RISK exceptions require immediate management attention
+
+================================================================================
+TESTING COMPLETED
+================================================================================
